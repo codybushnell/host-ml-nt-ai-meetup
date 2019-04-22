@@ -1,0 +1,6 @@
+name: host-ml-nt-ai-meetup
+dependencies:
+  - python=3
+  - pip
+  - pip:
+    - azureml-sdk
