@@ -4,3 +4,8 @@ dependencies:
   - pip
   - pip:
     - azureml-sdk
+    - black
+    - flake8
+    - flake8-docstrings
+    - pep8-naming
+    - -e .

@@ -12,15 +12,30 @@
 
 ### Code?
 
+Prerequisites?
+
+* conda
+* databricks cli
+* git
+* azure subscription
+* azure databricks workspace
+* azure machine learning service
+
 Clone the repo
 ```bash
-git clone
+git clone https://github.com/cbre360/host-ml-nt-ai-meetup.git
 ```
 
 Build the conda environment
 
 ```bash
 conda env create -f environment.yml
+```
+
+Activate the environment
+
+```bash
+source activate host-ml-nt-ai-meetup
 ```
 
 Get some data
