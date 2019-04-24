@@ -28,7 +28,7 @@ def train_model(data_file, random_seed):
 
     automl_config = AutoMLConfig(
         task="regression",
-        iteration_timeout_minutes=10,
+        iteration_timeout_minutes=5,
         iterations=10,
         primary_metric="spearman_correlation",
         n_cross_validations=5,
@@ -67,7 +67,7 @@ def train_model(data_file, random_seed):
             if float(props["score"]) > best_score:
                 best_run = sub_run
 
-    model_name = "Automl{}".format(str(uuid.uuid4()).replace("-", "")[:29])
+    model_name = "Automl{}".format(str(uuid.uuid4()).replace("-", ""))[:20]
     best_run.register_model(model_name=model_name)
     # best_run, fitted_model = local_run.get_output()
     # local_run.register_model(

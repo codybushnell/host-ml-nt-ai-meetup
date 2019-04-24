@@ -68,7 +68,7 @@ for sub_run in sub_runs:
         if float(props["score"]) > best_score:
             best_run = sub_run
 
-model_name = "Automl{}".format(str(uuid.uuid4()).replace("-", "")[:29])
+model_name = "Automl{}".format(str(uuid.uuid4()).replace("-", ""))[:20]
 best_run.register_model(model_name=model_name)
 # best_run, fitted_model = local_run.get_output()
 # local_run.register_model(
