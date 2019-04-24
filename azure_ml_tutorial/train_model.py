@@ -1,6 +1,7 @@
 """Module for training the utilization prediction model."""
 import logging
 from os import getenv
+import uuid
 
 import click
 import pandas as pd
@@ -33,6 +34,13 @@ def train_model(data_file, random_seed):
         n_cross_validations=5,
         debug_log="automl.log",
         verbosity=logging.INFO,
+        whitelist_models=[
+            "GradientBoosting",
+            "DecisionTree",
+            "RandomForest",
+            "ExtremeRandomTrees",
+            "LightGBM",
+        ],
         X=x,
         y=y,
         path=project_folder,
@@ -47,11 +55,25 @@ def train_model(data_file, random_seed):
     experiment = Experiment(ws, getenv("AML_EXPERIMENT_NAME"))
 
     local_run = experiment.submit(automl_config, show_output=True)
-    best_run, fitted_model = local_run.get_output()
-    local_run.register_model(
-        description="automl meetup best model"
-    )
-    print("Model name is {}".format(local_run.model_id))
+
+    sub_runs = list(local_run.get_children())
+
+    best_run = None
+    best_score = 0
+
+    for sub_run in sub_runs:
+        props = sub_run.get_properties()
+        if props["run_algorithm"] != "Ensemble":
+            if float(props["score"]) > best_score:
+                best_run = sub_run
+
+    model_name = "Automl{}".format(str(uuid.uuid4()))
+    best_run.register_model(model_name=model_name)
+    # best_run, fitted_model = local_run.get_output()
+    # local_run.register_model(
+    #     description="automl meetup best model"
+    # )
+    print("Model name is {}".format(model_name))
 
 
 if __name__ == "__main__":

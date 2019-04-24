@@ -1,10 +1,11 @@
 """Module for training the utilization prediction model."""
 import logging
+import uuid
+
+import azureml.dataprep as dprep
 from azureml.core.experiment import Experiment
 from azureml.core.workspace import Workspace
 from azureml.train.automl import AutoMLConfig
-import azureml.dataprep as dprep
-
 
 target = "utilization"
 ws = Workspace(
@@ -36,6 +37,16 @@ automl_config = AutoMLConfig(
     debug_log="automl.log",
     verbosity=logging.INFO,
     spark_context=sc,  # noqa
+    whitelist_models=[
+        "GradientBoosting",
+        "DecisionTree",
+        "RandomForest",
+        "ExtremeRandomTrees",
+        "LightGBM",
+    ],
+    blacklist_models=[
+        "ensemble"
+    ],
     X=x,
     y=y,
     path=project_folder,
@@ -45,8 +56,25 @@ automl_config = AutoMLConfig(
 experiment = Experiment(ws, "host-ml-nt-ai-meetup")
 
 db_run = experiment.submit(automl_config, show_output=True)
-best_run, fitted_model = db_run.get_output()
-db_run.register_model(
-    description="databricks automl meetup best model"
-)
-print("Model name is {}".format(db_run.model_id))
+
+sub_runs = list(db_run.get_children())
+
+best_run = None
+best_score = 0
+
+for sub_run in sub_runs:
+    props = sub_run.get_properties()
+    if props["run_algorithm"] != "Ensemble":
+        if float(props["score"]) > best_score:
+            best_run = sub_run
+
+model_name = "Automl{}".format(str(uuid.uuid4()))
+best_run.register_model(model_name=model_name)
+# best_run, fitted_model = local_run.get_output()
+# local_run.register_model(
+#     description="automl meetup best model"
+# )
+print("Model name is {}".format(model_name))
+# db_run.register_model(
+#     description="databricks automl meetup best model"
+# )

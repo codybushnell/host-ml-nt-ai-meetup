@@ -61,6 +61,8 @@ Open the databricks workspace to the code we just uploaded
 ### *NOTE:*
 For databricks to be able to authenticate to azureml, AML_WORKSPACE_NAME, AML_SUBSCRIPTION_ID, and AML_RESOURCE_GROUP secrets should be stored under the azureml scope. [info on secrets](https://docs.azuredatabricks.net/user-guide/secrets/index.html)
 
+Also, make sure you've installed the PyPI azureml-sdk[automl_databricks]==1.0.10 library on the databricks cluster you're running on.
+
 Create docker image to house the model
 
 *NOTE:* with the model name printed above, update the .env and score.py to reflect the model name.
