@@ -8,9 +8,9 @@ from os import getenv
 
 @click.command()
 @click.option(
-    "--data-file", "-f", type=click.Path(exists=True), default="bookings.parquet"
+    "--data-file", "-f", type=click.Path(exists=True), default="data/bookings.parquet"
 )
-@click.option("--output-file", "-o", type=click.Path(), default="model_data.parquet")
+@click.option("--output-file", "-o", type=click.Path(), default="data/model_data.parquet")
 def engineer_features(data_file, output_file):
     """Get booking data from microsoft graph."""
     df = pd.read_parquet(data_file)
@@ -77,14 +77,14 @@ def engineer_features(data_file, output_file):
         .sort_values(by=["floor", "start_month_int", "start_weekday_int"])
     )
     model_data = pd.get_dummies(model_data)
-    model_data.to_parquet(output_file, index=None)
+    model_data.to_parquet(output_file)
 
     target = "utilization"
     model_data_x = model_data[[c for c in model_data if c != target]]
     model_data_y = model_data[[target]]
 
-    model_data_x.to_parquet("model_data_x.parquet", index=None)
-    model_data_y.to_parquet("model_data_y.parquet", index=None)
+    model_data_x.to_parquet("data/model_data_x.parquet")
+    model_data_y.to_parquet("data/model_data_y.parquet")
 
     load_dotenv(find_dotenv())
     ws = Workspace(
@@ -94,8 +94,8 @@ def engineer_features(data_file, output_file):
     )
     datastore = ws.get_default_datastore()
     datastore.upload_files([
-        "model_data_x.parquet",
-        "model_data_y.parquet"
+        "data/model_data_x.parquet",
+        "data/model_data_y.parquet"
     ])
 
 

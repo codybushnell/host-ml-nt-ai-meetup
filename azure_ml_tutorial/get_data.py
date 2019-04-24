@@ -17,7 +17,7 @@ from yaml import safe_load
 @click.option("--client_secret", "-s", type=click.STRING, default="")
 @click.option("--years_in_past", "-y", type=click.INT, default=5)
 @click.option("--config-file", "-c", type=click.File("r"), default="config.yml")
-@click.option("--output-file", "-o", type=click.Path(), default="bookings.parquet")
+@click.option("--output-file", "-o", type=click.Path(), default="data/bookings.parquet")
 def get_data(
     tenant_id, client_id, client_secret, years_in_past, config_file, output_file
 ):
@@ -133,7 +133,7 @@ def get_data(
         if "location" in r
     ]
 
-    pd.DataFrame(responses).to_parquet(output_file, index=None)
+    pd.DataFrame(responses).to_parquet(output_file)
 
 
 if __name__ == "__main__":

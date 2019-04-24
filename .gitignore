@@ -139,3 +139,5 @@ automl/*
 .azureml/*
 
 .vscode/*
+bookings.parquet
+model.pkl

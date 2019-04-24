@@ -8,13 +8,12 @@ from azureml.core.experiment import Experiment
 from azureml.core.workspace import Workspace
 from azureml.train.automl import AutoMLConfig
 
-# from sklearn.model_selection import train_test_split
 from dotenv import find_dotenv, load_dotenv
 
 
 @click.command()
 @click.option(
-    "--data-file", "-f", type=click.Path(exists=True), default="model_data.parquet"
+    "--data-file", "-f", type=click.Path(exists=True), default="data/model_data.parquet"
 )
 @click.option("--random-seed", "-r", type=click.INT, default=0)
 def train_model(data_file, random_seed):
@@ -24,9 +23,6 @@ def train_model(data_file, random_seed):
 
     x = df.loc[:, [c for c in df if c != target]].values
     y = df[target].values
-    # x_train, x_test, y_train, y_test = train_test_split(
-    #     x, y, test_size=0.3, random_state=223
-    # )
     project_folder = "./automl"
 
     automl_config = AutoMLConfig(
