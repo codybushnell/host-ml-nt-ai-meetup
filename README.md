@@ -1,18 +1,9 @@
-## CBRE Host ML - Meetup Presentation
+## CBRE Host ML - Meetup Presentation Code
 ### North Texas AI Meetup - April 24th, 2019
 
-### Agenda
-1. Brief intro CBRE Host
-2. Why we use azure
-3. What is azure ml?
-4. What is automl?
-5. What problems does automl solve?
-6. Parallelism
-7. Databricks
+### Code
 
-### Code?
-
-Prerequisites?
+Prerequisites
 
 * conda
 * databricks cli
@@ -20,6 +11,7 @@ Prerequisites?
 * azure subscription
 * azure databricks workspace
 * azure machine learning service
+* docker
 
 Clone the repo
 ```bash
@@ -41,41 +33,29 @@ source activate host-ml-nt-ai-meetup
 Get some data
 
 ```bash
-download_data
-```
-
-Do some quick viz
-
-```bash
-visualize
+get_data
 ```
 
 Engineer some features
 
 ```bash
-build_features
+engineer_features
 ```
 
 Run automl job to get a baseline model
 
 ```bash
-find_best_model
-```
-
-Register the best model from automl as an Azureml Model
-
-```bash
-register_model
+train_model
 ```
 
 Create docker image to house the model
 
 ```bash
-create_image
+build_image
 ```
 
-Deploy the container as an Azure container instance
+Test the container
 
 ```bash
-deploy_image
+make
 ```

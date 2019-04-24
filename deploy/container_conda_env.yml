@@ -1,0 +1,11 @@
+name: project_environment
+dependencies:
+  - python=3.6.2
+  - numpy
+  - scikit-learn
+  - py-xgboost<=0.80
+  - pandas
+  - pip:
+    - azureml-defaults
+    - azureml-sdk[automl]
+    - python-dateutil

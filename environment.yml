@@ -1,11 +1,22 @@
 name: host-ml-nt-ai-meetup
+channels:
+  - conda-forge
 dependencies:
   - python=3
   - pip
+  - pandas
+  - pyarrow
+  - scikit-learn
+  - openmp
   - pip:
-    - azureml-sdk
+    - azureml-sdk[automl]==1.0.10
     - black
     - flake8
     - flake8-docstrings
     - pep8-naming
     - -e .
+    - python-dotenv
+    - click
+    - pyyaml
+    - lightgbm==2.2.1
+    - python-dateutil

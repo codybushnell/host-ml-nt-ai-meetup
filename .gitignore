@@ -128,3 +128,14 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/python
+config.yml
+
+data/*
+!data/.gitkeep
+
+automl/*
+!automl/.gitkeep
+
+.azureml/*
+
+.vscode/*
