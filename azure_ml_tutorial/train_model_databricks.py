@@ -69,7 +69,7 @@ for sub_run in sub_runs:
             best_run = sub_run
 
 model_name = "Automl{}".format(str(uuid.uuid4()).replace("-", ""))[:20]
-best_run.register_model(model_name=model_name)
+best_run.register_model(model_name=model_name, model_path="outputs/model.pkl")
 # best_run, fitted_model = local_run.get_output()
 # local_run.register_model(
 #     description="automl meetup best model"

@@ -11,7 +11,7 @@ import traceback
 def init():
     """Initialize the model in memory."""
     global model
-    model_path = Model.get_model_path(model_name="host_meetup")
+    model_path = Model.get_model_path(model_name="Automl64103b10548245")
     # model_path = "model.pkl"
     model = joblib.load(model_path)
 
