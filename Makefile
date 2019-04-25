@@ -1,8 +1,8 @@
 .PHONY: run_image_locally test_endpoint upload_to_databricks
 
 AML_IMAGE_NAME = meetup-utilization
-AML_IMAGE_VERSION = 12
-LOCAL_ENDPOINT_PORT = 5002
+AML_IMAGE_VERSION = 6
+LOCAL_ENDPOINT_PORT = 5001
 
 run_image_locally:
 	@echo "Logging into ACR."

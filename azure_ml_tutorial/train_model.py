@@ -34,13 +34,6 @@ def train_model(data_file, random_seed):
         n_cross_validations=5,
         debug_log="automl.log",
         verbosity=logging.INFO,
-        whitelist_models=[
-            "GradientBoosting",
-            "DecisionTree",
-            "RandomForest",
-            "ExtremeRandomTrees",
-            "LightGBM",
-        ],
         X=x,
         y=y,
         path=project_folder,

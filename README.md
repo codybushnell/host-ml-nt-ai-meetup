@@ -15,7 +15,7 @@ Prerequisites
 
 Clone the repo
 ```bash
-git clone https://github.com/cbre360/host-ml-nt-ai-meetup.git
+git clone https://github.com/codybushnell/host-ml-nt-ai-meetup.git
 ```
 
 Build the conda environment
